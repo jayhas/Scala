@@ -1,0 +1,16 @@
+object PrimeNumber extends App {
+
+    def nth(position: Int): Int = {
+      
+      def isPrime(number: Int): Boolean = {
+        primeNumbers.takeWhile(_ <= math.sqrt(number)).forall(number % _ != 0)
+      }
+      
+      lazy val primeNumbers: Stream[Int] = 2 #:: Stream.from(3).filter(isPrime(_))
+    
+      if (position <= 0) 0
+      else Some(primeNumbers(position-1)).get
+    }
+
+println(PrimeNumber.nth(100))
+}
